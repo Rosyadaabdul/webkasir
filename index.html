@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kasir TeKo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/views.css">
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <span class="brand-logo">TeKo</span>
+      <span class="brand-sub">Kasir</span>
+    </div>
+    <nav id="nav" class="nav" aria-label="Navigasi utama"></nav>
+    <span id="jam" class="jam"></span>
+  </header>
+
+  <div id="banner" class="banner-wrap sembunyi"></div>
+
+  <main id="mount" class="mount"></main>
+
+  <div id="lapisan-modal" class="lapisan-modal sembunyi"></div>
+  <div id="lapisan-toast" class="lapisan-toast" aria-live="polite"></div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

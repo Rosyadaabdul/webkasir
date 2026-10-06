@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hasil Test — Kasir TeKo</title>
+  <style>
+    :root { --lolos: #3F7D4E; --gagal: #B3402F; --garis: #E7D8C6; --lembut: #7A5C46; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 24px;
+      font-family: ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+      background: #FBF6EF; color: #3E2A20; font-size: 14px;
+    }
+    h1 { margin: 0 0 4px; font-size: 22px; }
+    .sub { margin: 0 0 20px; color: var(--lembut); }
+    #ringkasan {
+      position: sticky; top: 0; padding: 14px 18px; margin-bottom: 20px;
+      border-radius: 10px; background: #3E2A20; color: #FBF6EF; font-weight: 700;
+    }
+    #ringkasan.lolos { background: var(--lolos); }
+    #ringkasan.gagal { background: var(--gagal); }
+    .kasus {
+      display: grid; grid-template-columns: 28px 1fr; gap: 10px;
+      padding: 8px 12px; border-bottom: 1px solid var(--garis);
+    }
+    .kasus.gagal { background: #FBEDEA; }
+    .tanda { font-weight: 700; color: var(--lembut); }
+    .kasus.lolos .tanda { color: var(--lolos); }
+    .kasus.gagal .tanda { color: var(--gagal); }
+    .pesan {
+      font-family: ui-monospace, "Courier New", monospace;
+      font-size: 12px; color: var(--lembut);
+    }
+    .pesan.galat { color: var(--gagal); }
+  </style>
+</head>
+<body>
+  <h1>Hasil Test — Kasir TeKo</h1>
+  <p class="sub">Halaman ini menjalankan kasus uji yang sama dengan <code>node --test</code>, memakai berkas yang sama.</p>
+  <div id="ringkasan">Menjalankan…</div>
+  <div id="hasil"></div>
+
+  <script type="module">
+    import { daftarKasus } from "./cases.js";
+
+    const hasilEl = document.getElementById("hasil");
+    const ringkasanEl = document.getElementById("ringkasan");
+
+    let total = 0;
+    let lolos = 0;
+    const namaGagal = [];
+
+    function baris(nama, benar, pesan) {
+      const d = document.createElement("div");
+      d.className = `kasus ${benar ? "lolos" : "gagal"}`;
+
+      const tanda = document.createElement("span");
+      tanda.className = "tanda";
+      tanda.textContent = benar ? "lolos" : "GAGAL";
+
+      const isi = document.createElement("div");
+      const judul = document.createElement("div");
+      judul.textContent = nama;
+      isi.append(judul);
+
+      if (pesan) {
+        const p = document.createElement("div");
+        p.className = `pesan${benar ? "" : " galat"}`;
+        p.textContent = pesan;
+        isi.append(p);
+      }
+
+      d.append(tanda, isi);
+      return d;
+    }
+
+    function test(nama, fn) {
+      total += 1;
+      try {
+        const hasil = fn();
+        if (hasil && hasil.ok === true) {
+          lolos += 1;
+          hasilEl.append(baris(nama, true, hasil.pesan));
+        } else {
+          namaGagal.push(nama);
+          hasilEl.append(baris(nama, false, hasil ? hasil.pesan : "fungsi mengembalikan null"));
+        }
+      } catch (e) {
+        namaGagal.push(nama);
+        hasilEl.append(baris(nama, false, `exception: ${e.message}`));
+      }
+    }
+
+    daftarKasus({ test });
+
+    ringkasanEl.textContent = `${lolos} lolos · ${namaGagal.length} gagal · dari ${total} kasus`;
+    ringkasanEl.classList.add(namaGagal.length === 0 ? "lolos" : "gagal");
+    document.title = namaGagal.length === 0
+      ? `OK — ${lolos} lolos`
+      : `${namaGagal.length} gagal`;
+  </script>
+</body>
+</html>

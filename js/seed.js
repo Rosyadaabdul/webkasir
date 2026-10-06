@@ -1,0 +1,15 @@
+export const SEED_PRODUK = [
+  { id: "seed-01", name: "Kopi Susu Gula Aren", price: 22000, category: "Kopi", active: true },
+  { id: "seed-02", name: "Americano", price: 18000, category: "Kopi", active: true },
+  { id: "seed-03", name: "Cappuccino", price: 24000, category: "Kopi", active: true },
+  { id: "seed-04", name: "Kopi Susu Sirup", price: 20000, category: "Kopi", active: true },
+  { id: "seed-05", name: "Manual Brew", price: 25000, category: "Kopi", active: true },
+  { id: "seed-06", name: "Matcha Latte", price: 26000, category: "Non-Kopi", active: true },
+  { id: "seed-07", name: "Matcha Aren", price: 28000, category: "Non-Kopi", active: true },
+  { id: "seed-08", name: "Chocolate", price: 24000, category: "Non-Kopi", active: true },
+  { id: "seed-09", name: "Teh", price: 8000, category: "Non-Kopi", active: true },
+  { id: "seed-10", name: "Roti Bakar", price: 15000, category: "Snack", active: true },
+  { id: "seed-11", name: "Croissant", price: 18000, category: "Snack", active: true },
+  { id: "seed-12", name: "Cookies", price: 12000, category: "Snack", active: true },
+  { id: "seed-13", name: "Kentang Goreng", price: 20000, category: "Snack", active: true },
+];
